@@ -5,8 +5,7 @@
 /.pnp
 .pnp.js
 package-lock.json
-Dockerfile
-.dockerignore
+
 
 # testing
 /coverage
