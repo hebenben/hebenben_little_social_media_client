@@ -43,7 +43,9 @@ export default function Main() {
     }, []);
 
     const changePost = useCallback(()=>setIsAddPost((e) => !e),[])
-  
+    
+    const refreshFunc = useCallback(()=>this.forceUpdate(),[refreshFunc])
+
   return (
     <Box>
       <Navbar currentUser={currentUser} searchData={searchData} setSearchData={setSearchData} />
@@ -55,7 +57,7 @@ export default function Main() {
       {/* <Search searchData={searchData} /> */}
       <BottomNavi changePost={changePost}  />
       <OpenIconSpeedDial changePost={changePost} />
-      <AddPost isAddPost={isAddPost} currentUser={currentUser} changePost={changePost} />
+      <AddPost isAddPost={isAddPost} currentUser={currentUser} changePost={changePost} refreshFunc={refreshFunc}/>
 
     </Box>
   )

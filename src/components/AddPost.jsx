@@ -70,7 +70,7 @@ const style = {
 
 export default function AddPost(props) {
   const desc = useRef();
-  const {isAddPost,currentUser,changePost} = props;
+  const {isAddPost,currentUser,changePost,refreshFunc} = props;
   const [file, setFile] = useState(null);
   // const [value, setValue] = React.useState('');
 
@@ -114,7 +114,7 @@ export default function AddPost(props) {
         try{
           await axios.post(Upload, fileData);
           changePost();
-          window.location.Reload()
+          refreshFunc();
         } catch(err){
     
         }
