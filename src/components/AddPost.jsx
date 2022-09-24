@@ -114,7 +114,7 @@ export default function AddPost(props) {
         try{
           await axios.post(Upload, fileData);
           changePost();
-          navigate("/");
+          this.forceUpdate();
         } catch(err){
     
         }
