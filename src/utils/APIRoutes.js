@@ -1,4 +1,4 @@
-export const host = "http://http://129.153.52.184/";
+export const host = "http://129.153.52.184/";
 
 export const LoginRoute = `${host}/api/auth/login`;
 export const RegisterRoute = `${host}/api/auth/register`;
