@@ -44,7 +44,7 @@ export default function Main() {
 
     const changePost = useCallback(()=>setIsAddPost((e) => !e),[])
     
-    const refreshFunc = useCallback(()=>this.forceUpdate(),[refreshFunc])
+    const refreshFunc = useCallback(()=>this.forceUpdate(),[])
 
   return (
     <Box>
