@@ -9,6 +9,7 @@ import axios from "axios";
 import moment from "moment";
 import { CreatePost, Upload } from "../utils/APIRoutes";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const UserBox = styled(Box)({
   display: "flex",
@@ -67,6 +68,7 @@ const style = {
 };
 
 export default function AddPost(props) {
+  const navigate = useNavigate();
   const desc = useRef();
   const {isAddPost,currentUser,changePost} = props;
   const [file, setFile] = useState(null);
@@ -112,7 +114,7 @@ export default function AddPost(props) {
         try{
           await axios.post(Upload, fileData);
           changePost();
-          window.location.reload();
+          navigate("/");
         } catch(err){
     
         }
