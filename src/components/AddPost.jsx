@@ -102,22 +102,23 @@ export default function AddPost(props) {
     fileData.append("name", fileName);
     fileData.append("file",file);
     newPost.img = fileName;
-    try{
-      await axios.post(Upload, fileData);
-    } catch(err){
 
-    }
     try{
       const { data } = await axios.post(CreatePost, newPost);
       if (data.status === false) {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        changePost();
-        window.location.reload();
+        try{
+          await axios.post(Upload, fileData);
+          changePost();
+          window.location.reload();
+        } catch(err){
+    
+        }
       }
     }catch(err){
-
+      toast.error("Add post error", toastOptions);
     }
   };
 

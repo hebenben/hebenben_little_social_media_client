@@ -6,7 +6,7 @@ export const AvatarPost = `${host}/api/auth/setavatar/`;
 
 export const Upload = `${host}/api/upload`;
 
-export const CreatePost = `${host}/api/posts`; 
+export const CreatePost = `${host}/api/posts/`; 
 export const GetPost = `${host}/api/posts/search/`; 
 export const GetUserPost = `${host}/api/posts/timeline/`; 
 export const LikePost = `${host}/api/posts/like/`; 
