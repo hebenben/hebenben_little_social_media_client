@@ -114,7 +114,7 @@ export default function AddPost(props) {
         try{
           await axios.post(Upload, fileData);
           changePost();
-          window.location.href = 'http://hebenben.com/';
+          window.location.Reload()
         } catch(err){
     
         }
