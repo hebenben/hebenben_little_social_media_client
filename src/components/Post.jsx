@@ -93,7 +93,7 @@ export default function Post(props){
     <CardMedia
         component="img"
         image={PF + data.img}
-        alt="Paella dish"
+        alt="Image"
     />
     <CardContent>
         <Typography variant="body2" color="text.secondary">

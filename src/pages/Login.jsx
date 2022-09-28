@@ -26,8 +26,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://hebenben.com/">
+        hebenben
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -190,10 +190,10 @@ export default function Login() {
                 autoComplete="current-password"
                 onChange={(e) => handleChange(e)}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth

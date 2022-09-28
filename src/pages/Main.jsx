@@ -40,7 +40,7 @@ export default function Main() {
             }
         }
         asyncFunc()
-    }, [,currentUser]);
+    }, []);
 
     const changePost = useCallback(()=>setIsAddPost((e) => !e),[])
     
