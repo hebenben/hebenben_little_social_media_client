@@ -1,4 +1,4 @@
-export const host = "http://hebenben.com";
+export const host = process.env.REACT_APP_HOST;
 
 export const LoginRoute = `${host}/api/auth/login`;
 export const RegisterRoute = `${host}/api/auth/register`;
