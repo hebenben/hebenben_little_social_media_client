@@ -52,7 +52,7 @@ export default function Chat({ currentUser, isChatOpen }) {
     const ChatChange = (chat) => {
         setCurrentChat(chat);
       };
-    console.log(currentChat,contactsList)
+    // console.log(currentChat,contactsList,"currentChat,contactsList")
     return(
         <>
         {

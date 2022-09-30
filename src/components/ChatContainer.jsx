@@ -54,6 +54,7 @@ export default function ChatContainer({ currentUser, currentChat, socket}) {
 
     useEffect(() => {
         async function getAllMsg(){
+          console.log(currentChat);
               await axios.post(getChatMsg, {
                 from: currentUser._id,
                 to: currentChat._id,
@@ -61,10 +62,10 @@ export default function ChatContainer({ currentUser, currentChat, socket}) {
               .then(res => {
                 if(res.data.status === true){
                     setMessages(res.data.data);
-                    console.log(messages,"1")
+                    // console.log(messages,"1")
                   }
               })
-              console.log(messages,"2")
+              // console.log(messages,"2")
         }
         getAllMsg();
       }, [currentChat]);
@@ -98,13 +99,21 @@ export default function ChatContainer({ currentUser, currentChat, socket}) {
       }
 
       useEffect(() => {
+        console.log(currentChat)
         if (socket.current) {
-          socket.current.on("msg-recieve", (msg) => {
-            setReciveMessage({ isFromSelf: false, message: msg });
+          console.log(currentChat,"current")
+          socket.current.on("msg-recieve", (data) => {
+            console.log(currentChat,"recie")
+            console.log(data)
+            setReciveMessage(
+              data.from === currentChat._id ? 
+              { isFromSelf: false, message: data.msg } :
+              null
+              );
           });
         }
-        console.log(reciveMessage);
-      }, []);
+        // console.log(reciveMessage);
+      }, [currentChat]);
 
       useEffect(() => {
         reciveMessage && setMessages((prev) => [...prev, reciveMessage])
@@ -113,8 +122,8 @@ export default function ChatContainer({ currentUser, currentChat, socket}) {
       useEffect(() => {
         scrollRef.current?.scrollIntoView(false);
       },[messages])
-
-      console.log(messages)
+      console.log(currentChat,"currentChat")
+      // console.log(messages)
     return(
         <ChatContainerBox>
             <ContainerDiv>
