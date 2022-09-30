@@ -10,11 +10,13 @@ import { GetUser } from "../utils/APIRoutes";
 import axios from "axios";
 import Search from "../components/Search";
 import PostBody from "../components/PostBody";
+import Chat from "../components/Chat";
 
 export default function Main() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState({userId:'',username:''});
     const [isAddPost,setIsAddPost] = useState(false);
+    const [isChatOpen,setIsChatOpen] = useState(false);
     const [searchData, setSearchData] = useState("");
 
     useEffect(() => {
@@ -43,7 +45,7 @@ export default function Main() {
     }, []);
 
     const changePost = useCallback(()=>setIsAddPost((e) => !e),[])
-    
+    const changeChatDis = useCallback(()=>setIsChatOpen((e) => !e),[])
     const refreshFunc = useCallback(()=>window.location.reload(),[])
 
   return (
@@ -56,9 +58,9 @@ export default function Main() {
       }
       {/* <Search searchData={searchData} /> */}
       <BottomNavi changePost={changePost}  />
-      <OpenIconSpeedDial changePost={changePost} />
+      <OpenIconSpeedDial changePost={changePost} changeChatDis={changeChatDis} />
       <AddPost isAddPost={isAddPost} currentUser={currentUser} changePost={changePost} refreshFunc={refreshFunc}/>
-
+      <Chat isChatOpen={isChatOpen} currentUser={currentUser} ></Chat>
     </Box>
   )
 }

@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import MessageIcon from '@mui/icons-material/Message';
 
 
-export const OpenIconSpeedDial = ({changePost}) => {
+export const OpenIconSpeedDial = ({changePost, changeChatDis}) => {
 
 
 const actions = [
@@ -19,7 +19,10 @@ const actions = [
     
     const dialFunc = (e) => {
         if(e === "Add"){
-            changePost()
+            changePost();
+        }
+        else if(e === "Chat"){
+          changeChatDis();
         }
     }
   return (
