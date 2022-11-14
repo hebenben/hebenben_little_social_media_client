@@ -1,10 +1,11 @@
 import { Paper, IconButton, AppBar, Toolbar, Typography, Box, InputBase, Badge, Avatar, Menu, MenuItem } from '@mui/material'
 import { styled, } from '@mui/material/styles';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { delCookie } from '../utils/tools';
 import { useNavigate } from "react-router-dom";
-
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice';
 
 const StyledToolbar = styled(Toolbar)({
     display: "flex",
@@ -29,10 +30,20 @@ const UserBox = styled(Box)(({ theme }) => ({
     }
 }));
 
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition
+const mic = new SpeechRecognition()
+
+mic.continuous = true
+mic.interimResults = true
+mic.lang = 'en-US'
+
 
 export const Navbar = (props) => {
     const navigate = useNavigate();
     const { currentUser, setSearchData } = props
+    const [isListening, setIsListening] = useState(false);
+    const [inputVal, setInputVal] = useState('');
     const [open, setOpen] = useState(false)
 
     const homeHandler = (e) => {
@@ -49,6 +60,45 @@ export const Navbar = (props) => {
         delCookie(process.env.REACT_APP_LOCALHOST_KEY);
         navigate("/login");
     }
+
+    const inputChangeeee = (e) => {
+        e.preventDefault();
+        console.log(e)
+    }
+    useEffect(() => {
+        handleListen()
+      }, [isListening])
+
+    const handleListen = () => {
+        if (isListening) {
+            mic.start()
+            mic.onend = () => {
+            console.log('continue..')
+            mic.start()
+            }
+        } else {
+            mic.stop()
+            mic.onend = () => {
+            console.log('Stopped Mic on Click')
+            }
+        }
+        mic.onstart = () => {
+            console.log('Mics on')
+        }
+
+        mic.onresult = event => {
+            const transcript = Array.from(event.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('')
+            console.log(transcript)
+            setInputVal(transcript)
+            mic.onerror = event => {
+            console.log(event.error)
+            }
+        }
+    }
+
     return (
         <AppBar position='sticky'>
             <StyledToolbar>
@@ -62,7 +112,10 @@ export const Navbar = (props) => {
                         sx={{ ml: 1, flex: 1 }}
                         placeholder="Search..."
                         inputProps={{ 'aria-label': 'Search...' }}
+                        value={inputVal}
+                        onChange={e => setInputVal(e.target.value)}
                     />
+                    {isListening ? <SettingsVoiceIcon onClick={(e) => {setIsListening(prevState => !prevState);console.log(e)}} /> : <KeyboardVoiceIcon onClick={(e) => {setIsListening(prevState => !prevState);console.log(e)}} />}
                     <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" >
                         <SearchIcon />
                     </IconButton>

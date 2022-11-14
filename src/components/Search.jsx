@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 import PostBody from './PostBody';
@@ -8,6 +8,7 @@ import UserBody from './UserBody';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+
 
 // function TabPanel(props) {
 //   const { children, value, index, ...other } = props;
@@ -44,7 +45,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 export default function Search(props) {
   const { currentUser, searchData } = props;
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
